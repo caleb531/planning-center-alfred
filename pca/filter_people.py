@@ -8,15 +8,20 @@ import sys
 import pca.core as core
 
 
+# Convert the given dictionary representation of a Planning Center person to a
+# Alfred feedback result dictionary
+def get_result_from_person(person):
+
+    return {
+        'title': person.name
+    }
+
+
 # Retrieves search resylts matching the given query
 def get_result_list(query_str):
 
-    return [
-        {
-            'title': 'Caleb Evans',
-            'subtitle': '(123) 456-7890'
-        }
-    ]
+    people = core.fetch_data('/people/v2/people')
+    return [get_result_from_person(person) for person in people]
 
 
 def main(query_str):

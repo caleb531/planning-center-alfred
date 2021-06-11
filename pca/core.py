@@ -4,9 +4,20 @@
 from __future__ import print_function, unicode_literals
 
 import json
+import urllib2
+from gzip import GzipFile
+from StringIO import StringIO
 
 # Unique identifier for the workflow
 WORKFLOW_UID = 'com.calebevans.planningcenteralfred'
+
+
+# The base URL for the Planning Center API
+API_BASE_URL = 'https://api.planningcenteronline.com'
+# The User Agent used for all HTTP requests to the Planning Center APIs
+REQUEST_USER_AGENT = 'Planning Center for Alfred (Mozilla/5.0)'
+# The number of seconds to wait before timing out an HTTP request to the API
+REQUEST_CONNECTION_TIMEOUT = 5
 
 
 # Build the object for a single result list feedback item
@@ -37,3 +48,23 @@ def get_result_list_feedback_str(results):
     return json.dumps({
         'items': [get_result_list_feedback_item(result) for result in results]
     })
+
+
+# Fetch data from the Planning Center API
+def fetch_data(endpoint_path):
+
+    request_url = API_BASE_URL + endpoint_path
+    request = urllib2.Request(request_url, headers={
+        'User-Agent': REQUEST_USER_AGENT,
+        'Accept-Encoding': 'gzip, deflate'
+    })
+    response = urllib2.urlopen(request, timeout=REQUEST_CONNECTION_TIMEOUT)
+    url_content = response.read()
+
+    # Decompress response body if gzipped
+    if response.info().get('Content-Encoding') == 'gzip':
+        str_buf = StringIO(url_content)
+        with GzipFile(fileobj=str_buf, mode='rb') as gzip_file:
+            url_content = gzip_file.read()
+
+    return url_content.decode('utf-8')
