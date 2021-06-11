@@ -1,0 +1,4 @@
+alfred-workflow-packager==1.2.1
+biplist==1.0.3
+functools32==3.2.3.post2
+jsonschema==2.6.0
