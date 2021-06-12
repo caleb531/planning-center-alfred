@@ -13,7 +13,7 @@ import pca.core as core
 def get_result_from_person(person):
 
     return {
-        'title': person.name
+        'title': person['name']
     }
 
 
@@ -21,7 +21,8 @@ def get_result_from_person(person):
 def get_result_list(query_str):
 
     people = core.fetch_data('/people/v2/people')
-    return [get_result_from_person(person) for person in people]
+    return [get_result_from_person(person['attributes'])
+            for person in people['data']]
 
 
 def main(query_str):

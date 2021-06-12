@@ -3,7 +3,9 @@
 
 from __future__ import print_function, unicode_literals
 
+import base64
 import json
+import os
 import urllib2
 from gzip import GzipFile
 from StringIO import StringIO
@@ -50,13 +52,24 @@ def get_result_list_feedback_str(results):
     })
 
 
+# Return the value used for the Authorization header on every API request
+def get_authorization_header():
+
+    return '{auth_type} {auth_credentials}'.format(
+        auth_type='Basic',
+        auth_credentials=base64.standard_b64encode('{id}:{secret}'.format(
+            id=os.environ.get('app_id').strip(),
+            secret=os.environ.get('app_secret').strip())))
+
+
 # Fetch data from the Planning Center API
 def fetch_data(endpoint_path):
 
     request_url = API_BASE_URL + endpoint_path
     request = urllib2.Request(request_url, headers={
         'User-Agent': REQUEST_USER_AGENT,
-        'Accept-Encoding': 'gzip, deflate'
+        'Accept-Encoding': 'gzip, deflate',
+        'Authorization': get_authorization_header()
     })
     response = urllib2.urlopen(request, timeout=REQUEST_CONNECTION_TIMEOUT)
     url_content = response.read()
@@ -67,4 +80,4 @@ def fetch_data(endpoint_path):
         with GzipFile(fileobj=str_buf, mode='rb') as gzip_file:
             url_content = gzip_file.read()
 
-    return url_content.decode('utf-8')
+    return json.loads(url_content.decode('utf-8'))
