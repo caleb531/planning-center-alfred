@@ -20,11 +20,39 @@ def get_result_from_person(person):
     }
 
 
+# Calculate a numeric score used for sorting
+def get_person_sort_order(person, query_str):
+
+    attrs = person['attributes']
+    score = 0
+    for keyword in query_str.split(' '):
+        score += (
+            (int(keyword in attrs['name']) * -10) +
+            (int(attrs['first_name'].lower().startswith(keyword)) * -100) +
+            (int(attrs['last_name'].lower().startswith(keyword)) * -100)
+        )
+    return score
+
+
+# Return True if the given Person dictionary matches the given query string
+def person_matches_query_str(person, query_str):
+
+    return all(keyword in person['attributes']['name'].lower()
+               for keyword in query_str.split(' '))
+
+
 # Retrieves search resylts matching the given query
 def get_result_list(query_str):
 
+    query_str = query_str.lower()
+
     people = core.fetch_data('/people/v2/people')
-    return [get_result_from_person(person) for person in people['data']]
+    people = sorted(people,
+                    key=lambda person: get_person_sort_order(person, query_str))
+    results = [get_result_from_person(person) for person in people
+               if person_matches_query_str(person, query_str)]
+
+    return results
 
 
 def main(query_str):
