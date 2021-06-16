@@ -58,7 +58,17 @@ def get_result_list(query_str):
 
 def main(query_str):
 
-    results = get_result_list(query_str)
+    try:
+        results = get_result_list(query_str)
+    except Exception as error:
+        results = []
+        if hasattr(error, 'code') and error.code == 401:
+            results.append({
+                'title': 'Invalid API Credentals',
+                'subtitle': 'The app_id and app_secret variables are missing or incorrect',
+                'valid': False
+            })
+
     if not results:
         results.append({
             'title': 'No Results',
