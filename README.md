@@ -24,7 +24,7 @@ great care.
 
 ### 2. Enter ID and Secret into workflow
 
-When you first import the workflow into Alfred (download link above), you'll
+When you first import the workflow into Alfred ([download here](https://github.com/caleb531/planning-center-alfred/raw/master/Planning%20Center%20for%20Alfred.alfredworkflow)), you'll
 have the opportunity to paste the ID and Secret generated in the previous step.
 
 ![Workflow wariables](screenshot-variables.png)
