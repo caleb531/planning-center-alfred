@@ -25,7 +25,7 @@ great care.
 ### 2. Enter ID and Secret into workflow
 
 When you first import the workflow into Alfred, you'll have the opportunity to
-specify the ID and Secret generated in the previous step.
+paste the ID and Secret generated in the previous step.
 
 ![Workflow wariables](screenshot-variables.png)
 
