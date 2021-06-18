@@ -6,6 +6,7 @@ from __future__ import print_function, unicode_literals
 import base64
 import json
 import os
+import urllib
 import urllib2
 from gzip import GzipFile
 from StringIO import StringIO
@@ -62,10 +63,14 @@ def get_authorization_header():
             secret=os.environ.get('app_secret').strip())))
 
 
-# Fetch data from the Planning Center API
-def fetch_data(endpoint_path):
+# Fetch data from the Planning Center API, optionally along with the dict of
+# GET parameters
+def fetch_data(endpoint_path, params=None):
 
     request_url = API_BASE_URL + endpoint_path
+    if params:
+        request_url += '?' + urllib.urlencode(params)
+
     request = urllib2.Request(request_url, headers={
         'User-Agent': REQUEST_USER_AGENT,
         'Accept-Encoding': 'gzip, deflate',
