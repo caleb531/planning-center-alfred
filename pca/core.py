@@ -6,6 +6,7 @@ from __future__ import print_function, unicode_literals
 import base64
 import json
 import os
+import sys
 import urllib
 import urllib2
 from gzip import GzipFile
@@ -86,3 +87,30 @@ def fetch_data(endpoint_path, params=None):
             url_content = gzip_file.read()
 
     return json.loads(url_content.decode('utf-8'))['data']
+
+
+# A context manager (to be used in `with` statement) for capturing errors and
+# inserting them into Alfred's result list
+class handle_workflow_errors(object):
+
+    def __init__(self, results):
+        self.results = results
+
+    def __enter__(self):
+        pass
+
+    def __exit__(self, error_type, error, traceback):
+        if hasattr(error, 'code') and error.code == 401:
+            self.results.append({
+                'title': 'Invalid API Credentals',
+                'subtitle': 'The app_id and app_secret variables are missing or incorrect',
+                'valid': False
+            })
+        elif error:
+            print(error, file=sys.stderr)
+            self.results.append({
+                'title': 'Script Error',
+                'subtitle': str(error),
+                'valid': False
+            })
+        return True

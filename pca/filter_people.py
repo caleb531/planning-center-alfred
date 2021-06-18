@@ -36,23 +36,9 @@ def get_result_list(query_str):
 
 def main(query_str):
 
-    try:
+    results = []
+    with core.handle_workflow_errors(results):
         results = get_result_list(query_str)
-    except Exception as error:
-        results = []
-        if hasattr(error, 'code') and error.code == 401:
-            results.append({
-                'title': 'Invalid API Credentals',
-                'subtitle': 'The app_id and app_secret variables are missing or incorrect',
-                'valid': False
-            })
-        else:
-            print(error, file=sys.stderr)
-            results.append({
-                'title': 'Script Error',
-                'subtitle': str(error),
-                'valid': False
-            })
 
     if not results:
         results.append({
