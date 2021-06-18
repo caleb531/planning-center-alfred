@@ -31,7 +31,7 @@ have the opportunity to paste the ID and Secret generated in the previous step.
 
 ## Usage
 
-### Search for People
+### Search for people
 
 To search for people, use the `pcp` command. You can search by name, phone
 number, or email address.
