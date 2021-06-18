@@ -70,6 +70,11 @@ def main(query_str):
             })
         else:
             print(error, file=sys.stderr)
+            results.append({
+                'title': 'Script Error',
+                'subtitle': str(error),
+                'valid': False
+            })
 
     if not results:
         results.append({
