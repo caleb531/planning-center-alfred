@@ -15,9 +15,13 @@ def get_result_from_person(person):
     return {
         'title': person['attributes']['name'],
         'subtitle': 'View in Planning Center',
-        'arg': '{base_url}/AC{person_id}'.format(
-            base_url='https://people.planningcenteronline.com/people',
-            person_id=person['id'])
+        'arg': person['id'],
+        'variables': {
+            'person_id': person['id'],
+            'person_url': '{base_url}/AC{person_id}'.format(
+                base_url='https://people.planningcenteronline.com/people',
+                person_id=person['id'])
+        }
     }
 
 
