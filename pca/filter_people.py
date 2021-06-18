@@ -18,6 +18,7 @@ def get_result_from_person(person):
         'arg': person['id'],
         'variables': {
             'person_id': person['id'],
+            'person_name': person['attributes']['name'],
             'person_url': '{base_url}/AC{person_id}'.format(
                 base_url='https://people.planningcenteronline.com/people',
                 person_id=person['id'])
