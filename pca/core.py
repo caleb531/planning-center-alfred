@@ -109,7 +109,7 @@ class handle_workflow_errors(object):
         elif error:
             print(error, file=sys.stderr)
             self.results.append({
-                'title': 'Script Error',
+                'title': 'Workflow Error',
                 'subtitle': str(error),
                 'valid': False
             })
