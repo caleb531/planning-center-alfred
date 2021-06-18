@@ -33,5 +33,11 @@ have the opportunity to paste the ID and Secret generated in the previous step.
 
 ### Search for People
 
-To search for people, use the `pcp` command. For example, `pcp caleb` will
-search the people in your Planning Center account for `caleb`.
+To search for people, use the `pcp` command. You can search by name, phone
+number, or email address.
+
+#### Examples
+
+- `pcp caleb`
+- `pcp caleb@calebevans.me`
+- `pcp 123-456-7890`
