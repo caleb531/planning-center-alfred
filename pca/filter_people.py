@@ -68,6 +68,8 @@ def main(query_str):
                 'subtitle': 'The app_id and app_secret variables are missing or incorrect',
                 'valid': False
             })
+        else:
+            print(error, file=sys.stderr)
 
     if not results:
         results.append({
