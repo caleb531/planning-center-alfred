@@ -41,3 +41,10 @@ number, or email address.
 - `pcp caleb`
 - `pcp caleb@calebevans.me`
 - `pcp 123-456-7890`
+
+#### Copy to clipboard
+
+When searching for people via the `pcp` command, holding down the `command` key
+while choosing a result will copy the person's phone number to the clipboard.
+Similarly, holding down the `option` key while choosing a result will copy the
+person's email address.
