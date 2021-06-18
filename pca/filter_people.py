@@ -32,7 +32,8 @@ def get_result_list(query_str):
     query_str = query_str.lower()
 
     people = core.fetch_data('/people/v2/people', params={
-        'where[search_name_or_email_or_phone_number]': query_str
+        'where[search_name_or_email_or_phone_number]': query_str,
+        'where[status]': 'active'
     })
     results = [get_result_from_person(person) for person in people]
 
