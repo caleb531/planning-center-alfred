@@ -1,4 +1,7 @@
 alfred-workflow-packager==1.2.1
 biplist==1.0.3
-functools32==3.2.3.post2
+flake8==4.0.1
 jsonschema==2.6.0
+mccabe==0.6.1
+pycodestyle==2.8.0
+pyflakes==2.4.0

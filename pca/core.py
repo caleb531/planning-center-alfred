@@ -1,16 +1,14 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # coding=utf-8
-
-from __future__ import print_function, unicode_literals
 
 import base64
 import json
 import os
 import sys
-import urllib
-import urllib2
+import urllib.request as urlrequest
+import urllib.parse as urlparse
 from gzip import GzipFile
-from StringIO import StringIO
+from io import StringIO
 
 # Unique identifier for the workflow
 WORKFLOW_UID = 'com.calebevans.planningcenteralfred'
@@ -61,7 +59,8 @@ def get_authorization_header():
         auth_type='Basic',
         auth_credentials=base64.standard_b64encode('{id}:{secret}'.format(
             id=os.environ.get('app_id').strip(),
-            secret=os.environ.get('app_secret').strip())))
+            secret=os.environ.get('app_secret').strip())
+                    .encode('utf-8')).decode('utf-8'))
 
 
 # Fetch data from the Planning Center API, optionally along with the dict of
@@ -70,14 +69,14 @@ def fetch_data(endpoint_path, params=None):
 
     request_url = API_BASE_URL + endpoint_path
     if params:
-        request_url += '?' + urllib.urlencode(params)
+        request_url += '?' + urlparse.urlencode(params)
 
-    request = urllib2.Request(request_url, headers={
+    request = urlrequest.Request(request_url, headers={
         'User-Agent': REQUEST_USER_AGENT,
         'Accept-Encoding': 'gzip, deflate',
         'Authorization': get_authorization_header()
     })
-    response = urllib2.urlopen(request, timeout=REQUEST_CONNECTION_TIMEOUT)
+    response = urlrequest.urlopen(request, timeout=REQUEST_CONNECTION_TIMEOUT)
     url_content = response.read()
 
     # Decompress response body if gzipped
@@ -103,7 +102,8 @@ class handle_workflow_errors(object):
         if hasattr(error, 'code') and error.code == 401:
             self.results.append({
                 'title': 'Invalid API Credentals',
-                'subtitle': 'The app_id and app_secret variables are missing or incorrect',
+                'subtitle': 'The app_id and app_secret variables are missing'
+                            'or incorrect',
                 'valid': False
             })
         elif error:
