@@ -8,7 +8,7 @@ import sys
 import urllib.request as urlrequest
 import urllib.parse as urlparse
 from gzip import GzipFile
-from io import StringIO
+from io import BytesIO
 
 # Unique identifier for the workflow
 WORKFLOW_UID = 'com.calebevans.planningcenteralfred'
@@ -81,7 +81,7 @@ def fetch_data(endpoint_path, params=None):
 
     # Decompress response body if gzipped
     if response.info().get('Content-Encoding') == 'gzip':
-        str_buf = StringIO(url_content)
+        str_buf = BytesIO(url_content)
         with GzipFile(fileobj=str_buf, mode='rb') as gzip_file:
             url_content = gzip_file.read()
 
