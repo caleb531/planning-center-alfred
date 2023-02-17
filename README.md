@@ -3,7 +3,7 @@
 *Copyright 2021-2023 Caleb Evans*  
 *Released under the MIT license*
 
-Planning Center for Alfred is an Alfred 4 workflow designed to help churches
+Planning Center for Alfred is an Alfred 5 workflow designed to help churches
 with various Planning Center functions, like searching for people.
 
 ## Connecting to your Planning Center account
