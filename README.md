@@ -6,6 +6,23 @@
 Planning Center for Alfred is an Alfred 5 workflow designed to help churches
 with various Planning Center functions, like searching for people.
 
+## Installation
+
+To download the workflow, simply click the download link below.
+
+[Download Planning Center for Alfred][workflow-download-alfred5]
+
+[workflow-download-alfred5]: https://github.com/caleb531/planning-center-alfred/raw/main/Planning%20Center%20for%20Alfred.alfredworkflow
+
+### Command Line Tools
+
+If you are installing the workflow for the first time, you may be prompted to
+install Apple's Command Line Tools. These developer tools are required for the
+workflow to function, and fortunately, they have a much smaller size footprint
+than full-blown Xcode.
+
+![Prompt to install Apple's Command Line Tools](screenshot-clt-installer.png)
+
 ## Connecting to your Planning Center account
 
 ### 1. Generate Personal Access Token
