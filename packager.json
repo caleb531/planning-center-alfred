@@ -1,5 +1,7 @@
 {
-  "export_file": "Planning Center for Alfred.alfredworkflow",
+  "export_files": [
+    "Planning Center for Alfred.alfredworkflow"
+  ],
   "bundle_id": "com.calebevans.planningcenteralfred",
   "resources": [
       "icon.png",
