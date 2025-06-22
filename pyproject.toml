@@ -1,0 +1,35 @@
+[project]
+name = "planning-center-alfred"
+version = "3.1.0"
+description = "An Alfred 5 workflow to help churches with Planning Center functions like searching for people."
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+    {name = "Caleb Evans", email = "caleb@calebevans.me"}
+]
+maintainers = [
+    {name = "Caleb Evans", email = "caleb@calebevans.me"}
+]
+license = "MIT"
+dependencies = []
+
+[dependency-groups]
+dev = []
+
+[tool.ruff]
+include = ["**/*.py"]
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    "W",
+    # pyflakes
+    "F",
+    # isort
+    "I",
+    # perflint
+    "PERF",
+    # flake8-executable
+    "EXE"
+]
