@@ -5,8 +5,8 @@ import base64
 import json
 import os
 import sys
-import urllib.request as urlrequest
 import urllib.parse as urlparse
+import urllib.request as urlrequest
 from gzip import GzipFile
 from io import BytesIO
 
