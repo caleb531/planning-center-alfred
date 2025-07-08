@@ -47,7 +47,7 @@ previous step.
 
 ![Workflow configuration](screenshot-variables.png)
 
-[download]: https://github.com/caleb531/planning-center-alfred/raw/master/Planning%20Center%20for%20Alfred.alfredworkflow
+[download]: https://github.com/caleb531/planning-center-alfred/raw/main/Planning%20Center%20for%20Alfred.alfredworkflow
 
 ## Usage
 
